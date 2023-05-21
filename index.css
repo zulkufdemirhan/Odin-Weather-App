@@ -1,0 +1,4 @@
+#weather-body, #notification-box{
+  display: none;
+  flex-direction: column;
+}

@@ -1,10 +1,11 @@
 const URL = "https://api.openweathermap.org/data/2.5/"
-const API_KEY = ""
+const API_KEY = "b21ab90f469c7307705b0c8716de55ee"
 
 const form = document.querySelector('#form').addEventListener('submit', (e) => {
   e.preventDefault();
 });
 
+const weatherBody = document.querySelector('#weather-body');
 const search = document.querySelector('#search_city');
 search.addEventListener('keypress', setApp);
 
@@ -31,14 +32,14 @@ function submitApp (){
 
 function getResult(city){
   const api = `${URL}weather?q=${city}&appid=${API_KEY}&units=metric&lang=en`
-
   async function getData() {
     const response = await fetch(api);
     if (response.status >= 200 && response.status <= 299) {
       const weatherData = await response.json();
+      weatherBody.style.display = "flex";
       displayResult(weatherData);
     } else {
-      console.log("====ERROR====");
+      notification("Please check the correctness of the city name.");
     }
   }
   getData()
@@ -59,5 +60,24 @@ function displayResult (data) {
 
   const wind = document.querySelector('#wind');
   wind.innerText = data.wind.speed
+
+  const tempreture = document.querySelector('#weather-temp');
+  tempreture.innerText = `${Math.round(data.main.temp)} °C`
+
+  switch(data.weather[0].main) {
+    case "Clouds":
+      notification("Don't let the cloudy weather bother you.");
+    break;
+    case "Clear":
+      notification("The weather looks nice to spend time outside.");
+    break;
+  }
 }
 
+// Notification Component
+function notification (message) {
+  const notification = document.querySelector('#notification-box');
+  const notificationText = document.querySelector('#notification-text');
+  notification.style.display = "flex";
+  notificationText.innerHTML = message;
+}
