@@ -39,7 +39,7 @@ function getResult(city){
       weatherBody.style.display = "flex";
       displayResult(weatherData);
     } else {
-      notification("Please check the correctness of the city name.");
+      notification("Please check the correctness of the city name.", "alert-warning");
     }
   }
   getData()
@@ -66,18 +66,19 @@ function displayResult (data) {
 
   switch(data.weather[0].main) {
     case "Clouds":
-      notification("Don't let the cloudy weather bother you.");
+      notification("Don't let the cloudy weather bother you.", "alert-primary");
     break;
     case "Clear":
-      notification("The weather looks nice to spend time outside.");
+      notification("The weather looks nice to spend time outside.", "alert-success");
     break;
   }
 }
 
 // Notification Component
-function notification (message) {
+function notification (message, color) {
   const notification = document.querySelector('#notification-box');
   const notificationText = document.querySelector('#notification-text');
   notification.style.display = "flex";
+  notification.classList.add(color);
   notificationText.innerHTML = message;
 }
