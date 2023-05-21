@@ -14,20 +14,22 @@
       <span id="notification-text">You should check in on some of those fields below.</span>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-    <div class="container vh-100 d-flex justify-content-center align-items-center">
-      <div class="card bg-light col-4">
-        <div class="card-header bg-light rounded border-0">
+    <div class="container d-flex flex-column justify-content-center align-items-center">
+      <h4 class="text-center">Weather App</h4>
+      <div class="card bg-light col-5">
+        <div class="card-header bg-light rounded border-0 py-3">
           <form id="form">
             <div class="d-flex justify-content-between align-items-center">
               <div class="flex-grow-1">
                 <input type="text" class="form-control" id="search_city" aria-describedby="searchCity" placeholder="City">
               </div>
-              <button type="submit" id="search_city_button" class="btn btn-light ms-2"  disabled><i class="fa-solid fa-magnifying-glass"></i></button>
+              <button type="submit" id="search_city_button" class="btn btn-secondary btn-sm rounded-5 ms-2 opacity-75"  disabled><i class="fa-solid fa-magnifying-glass"></i></button>
+              <button class="btn btn-link ms-2 px-0 text-dark opacity-75" id="unit-button">Metric</button>
             </div>
           </form>
         </div>
-        <div class="card-body" id="weather-body">
-          <h3 id="city-name"></h3>
+        <div class="card-body pt-0" id="weather-body">
+          <h4 id="city-name"></h4>
           <div class="d-flex align-items-center mb-2">
             <span id="weather-icon" class="border rounded" style="height:50px; width:50px;"></span>
             <span class="h6 mb-0 ms-2 opacity-75 text-capitalize" id="weather-desc"></span>

@@ -1,16 +1,34 @@
 const URL = "https://api.openweathermap.org/data/2.5/"
 const API_KEY = "b21ab90f469c7307705b0c8716de55ee"
+let UNIT = "metric"
+
+const unitButton = document.querySelector('#unit-button');
+unitButton.addEventListener('click', () => {
+  if (UNIT === "metric") {
+    UNIT = "imperial"
+    unitButton.innerText = "Imperial"
+    getResult(search.value)
+  }else{
+    UNIT = "metric"
+    unitButton.innerText = "Metric"
+    getResult(search.value)
+  }
+});
 
 const form = document.querySelector('#form').addEventListener('submit', (e) => {
   e.preventDefault();
 });
 
 const weatherBody = document.querySelector('#weather-body');
+
 const search = document.querySelector('#search_city');
 search.addEventListener('keypress', setApp);
 
-const submitSearch = document.querySelector('#search_city_button');
-submitSearch.addEventListener('click', submitApp)
+function setApp (e){
+  if (e.code == "Enter"){
+    getResult(search.value)
+  }
+}
 
 search.addEventListener('input', function() {
   if (search.value.trim() === '') {
@@ -20,18 +38,15 @@ search.addEventListener('input', function() {
   }
 });
 
-function setApp (e){
-  if (e.code == "Enter"){
-    getResult(search.value)
-  }
-}
+const submitSearch = document.querySelector('#search_city_button');
+submitSearch.addEventListener('click', submitApp)
 
 function submitApp (){
   getResult(search.value)
 }
 
 function getResult(city){
-  const api = `${URL}weather?q=${city}&appid=${API_KEY}&units=metric&lang=en`
+  const api = `${URL}weather?q=${city}&appid=${API_KEY}&units=${UNIT}&lang=en`
   async function getData() {
     const response = await fetch(api);
     if (response.status >= 200 && response.status <= 299) {
@@ -62,7 +77,7 @@ function displayResult (data) {
   wind.innerText = data.wind.speed
 
   const tempreture = document.querySelector('#weather-temp');
-  tempreture.innerText = `${Math.round(data.main.temp)} °C`
+  tempreture.innerText = `${Math.round(data.main.temp)}°${UNIT === "metric" ? "C" : "F"}`;
 
   switch(data.weather[0].main) {
     case "Clouds":

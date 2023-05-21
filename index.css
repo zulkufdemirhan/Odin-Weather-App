@@ -2,3 +2,15 @@
   display: none;
   flex-direction: column;
 }
+
+#unit-button {
+  width: 4rem;
+}
+
+body{
+  background: linear-gradient(40deg, rgb(247, 247, 247) 0%, rgb(253, 247, 247) 100%);
+}
+
+.container {
+  height: 100vh;
+}
