@@ -1,5 +1,5 @@
 const URL = "https://api.openweathermap.org/data/2.5/"
-const API_KEY = "b21ab90f469c7307705b0c8716de55ee"
+const API_KEY = "YOUR API KEY"
 let UNIT = "metric"
 
 const unitButton = document.querySelector('#unit-button');
